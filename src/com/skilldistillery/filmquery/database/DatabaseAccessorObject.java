@@ -44,8 +44,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
 				film.setActors(findActorsByFilmId(filmId));
-//				film = new Film(filmId, title, desc, releaseYear, langId, rentDur, rate, length, repCost, 
-//				rating, features, getActorByFilm(filmId), getLanguage(landId), getCategory(filmId)); 
+
 			}
 			rs.close();
 			stmt.close();
@@ -72,7 +71,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				actor.setId(rs.getInt("id"));
 				actor.setFirstName(rs.getString("first_name"));
 				actor.setLastName(rs.getString("last_name"));
-//				actor = new Actor(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"));
 			}
 			rs.close();
 			stmt.close();
@@ -119,8 +117,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			String sql = "SELECT id, title FROM film WHERE title LIKE ? or description LIKE ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, "%" + keyword + "%" + sql);
-			stmt.setString(2, "%" + keyword + "%" + sql);
+			stmt.setString(1, "%" + keyword + "%");
+			stmt.setString(2, "%" + keyword + "%");
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -134,7 +132,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return filmlist;
 	}
-
+	
+	
 	static {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
