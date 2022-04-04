@@ -41,16 +41,16 @@ public class FilmQueryApp {
 		System.out.println("Enter (3) to Quit");
 		System.out.println("=========================================");
 
-			do {
+			while (flag) {
 			System.out.println();
 			System.out.println("Please select (1 - 3) >>");
 			int choice = 0;
 			try {
 				choice = input2.nextInt();
 			} catch (InputMismatchException e) {
-				System.out.println("Input mismatch! Please enter (1 - 3) only");
-				choice = 0;
-				continue;
+				System.out.println("Input mismatch, please enter (1 - 3) only");
+				input2.reset();
+				input2.next();
 			}
 
 			switch (choice) {
@@ -78,7 +78,7 @@ public class FilmQueryApp {
 				break;
 
 			default:
-				System.out.println("Please select a valid option.");
+				System.out.println("Please enter a valid number (1 - 3).");
 				break;
 			}
 			
